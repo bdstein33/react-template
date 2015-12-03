@@ -46,52 +46,38 @@
 
 	'use strict';
 
-	// 'use strict';
-	// // import 'react';
-	// import React from 'react';
-	// // import ApplicationStore from '../stores/ApplicationStore';
+	var _react = __webpack_require__(1);
 
-	// // export class Application extends React.Component {
-	// //   render() {
-	// //     return (
-	// //       <div>
-	// //         <h1>This is The application page of the react application!</h1>
-	// //       </div>
-	// //     );
-	// //   }
-	// // }
+	var _react2 = _interopRequireDefault(_react);
 
-	// var Application = React.createClass({
-	//   render: function() {
-	//     return (
-	//       <div>
-	//         This is The application page of the react application!
-	//       </div>
-	//     );
-	//   }
-	// });
+	var _reactDom = __webpack_require__(158);
 
-	// export default Application;
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var React = __webpack_require__(1);
+	var _SignupForm = __webpack_require__(159);
 
-	var Application = React.createClass({
+	var _SignupForm2 = _interopRequireDefault(_SignupForm);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Application = _react2.default.createClass({
 	  displayName: 'Application',
 
 	  render: function render() {
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      React.createElement(
+	      _react2.default.createElement(
 	        'h1',
 	        null,
-	        'This is the main app page'
-	      )
+	        'This is the main app page!'
+	      ),
+	      _react2.default.createElement(_SignupForm2.default, null)
 	    );
 	  }
 	});
 
-	React.render(React.createElement(Application, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(Application, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -19670,6 +19656,67 @@
 
 	module.exports = deprecated;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(3);
+
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	'strict mode';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SignUpForm = _react2.default.createClass({
+	  displayName: 'SignUpForm',
+
+	  signup: function signup(e) {
+	    e.preventDefault();
+	    console.log('Signing up');
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'Sign Up Form'
+	      ),
+	      _react2.default.createElement(
+	        'form',
+	        null,
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Email'
+	        ),
+	        _react2.default.createElement('input', { type: 'text' }),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Pasword'
+	        ),
+	        _react2.default.createElement('input', { type: 'password' }),
+	        _react2.default.createElement('input', { onClick: this.signup, type: 'submit' })
+	      )
+	    );
+	  }
+	});
+
+	module.exports = SignUpForm;
 
 /***/ }
 /******/ ]);

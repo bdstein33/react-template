@@ -1,26 +1,41 @@
 'use strict';
 
-require('localenv');
-var express = require('express'),
-  morgan = require('morgan'),
-  bodyParser = require('body-parser'),
-  debug = require('debug')('(Server)'),
-  app = module.exports = express(),
-  port;
+import 'localenv';
+import express from 'express';
+// import morgan from 'morgan';
+import bodyParser from 'body-parser';
 
-app.use('/', express.static('client'));
-app.use(morgan('dev'));
+import {navigateAction} from 'fluxible-router';
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import {createElementWithContext} from 'fluxible-addons-react';
+import app from './app';
+import HtmlComponent from '.components/Html';
 
-app.use(bodyParser.urlencoded({
+
+
+const server = express();
+const port = process.env.PORT || 3000;
+
+console.log(__dirname + '/client/dist');
+server.use('/public', express.static(__dirname + 'client'));
+// server.use(morgan('dev'));
+
+server.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(bodyParser.json());
+server.use(bodyParser.json());
 
-// let auth = require('./server/resources/auth');
-// app.use('/', auth);
+server.use((req, res, next) => {
+  const context = app.createContext();
 
-port = process.env.PORT || 3000;
-app.listen(port, function() {
-  debug('Listening on port ' + port);
+  console.log('Executing navigate action');
+
+  context.executeAction()
+
+});
+
+server.listen(port, () => {
+  console.log('Listening on port ' + port);
 });

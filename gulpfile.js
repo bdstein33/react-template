@@ -10,9 +10,8 @@ var gulp = require('gulp'),
   eslint = require('gulp-eslint'),
   eslintFormatter = require('eslint-friendly-formatter'),
   nodemon = require('gulp-nodemon'),
-  webpack = require('webpack-stream'),
-  livereload = require('gulp-livereload'),
-  debug = require('debug')('(Gulp)');
+  webpack = require('webpack-stream');
+  // livereload = require('gulp-livereload'),
 
 var files = {
   js: 'server.js'
@@ -26,11 +25,11 @@ gulp.task('eslint', function() {
 
 gulp.task('start', function() {
   nodemon({
-    script: 'server.js',
-    ext: 'js html', // look for changes in .js and .html files
-    tasks: ['eslint']
+    script: 'start.js',
+    ext: 'jsx html', // look for changes in .jsx and .html files
+    tasks: ['eslint', 'webpack']
   }).on('restart', function() {
-    debug('Restarted app');
+    console.log('Restarted app');
   });
 });
 
@@ -39,7 +38,7 @@ gulp.task('webpack', function() {
     .pipe(plumber())
     .pipe(webpack(require('./webpack.config.js'), null, 
       function() {
-        livereload.changed('./client/dist/bundle.js');
+        // livereload.changed('./client/dist/bundle.js');
       }
     ))
     .pipe(gulp.dest('./client/dist'));
