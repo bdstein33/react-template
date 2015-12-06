@@ -30,4 +30,4 @@ ApplicationStore.handlers = {
   'UPDATE_PAGE_TITLE'    : 'updatePageTitle'
 };
 
-export default ApplicationStore
+export default ApplicationStore;

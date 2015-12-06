@@ -6,7 +6,7 @@
   "main": "server.js",
   "author": "Michael Ridgway <mridgway@yahoo-inc.com>",
   "scripts": {
-    "dev": "node webpack-dev-server.js & PORT=3001 nodemon start.js -e js,jsx",
+    "dev": "nodemon start.js -e js,jsx",
     "start": "node start.js"
   },
   "dependencies": {
@@ -34,13 +34,15 @@
     "eslint-friendly-formatter": "^1.2.2",
     "eslint-plugin-react": "^3.11.2",
     "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
     "gulp-eslint": "^1.1.1",
     "gulp-nodemon": "^2.0.4",
+    "gulp-sass": "^2.1.0",
+    "gulp-scss-lint": "^0.3.8",
     "gulp-sequence": "^0.4.1",
     "nodemon": "^1.2.1",
     "react-hot-loader": "^1.2.8",
     "webpack": "^1.4.12",
-    "webpack-dev-server": "^1.6.5",
     "webpack-stream": "^2.3.0"
   }
 }

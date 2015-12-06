@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import Fluxible from 'fluxible';
 import Application from './components/Application';
 import RouteStore from './stores/RouteStore';

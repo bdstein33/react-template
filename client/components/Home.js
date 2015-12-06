@@ -4,8 +4,12 @@
  */
 import React from 'react';
 
-function Home () {
-  return <p>HOME PAGE</p>;
+class Home extends React.Component {
+  render() {
+    return (
+      <p>HOME PAGE</p>
+    );
+  } 
 }
 
 export default Home;

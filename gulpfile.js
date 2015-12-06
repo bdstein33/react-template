@@ -5,21 +5,37 @@ var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   webpack = require('webpack-stream'),
   sequence = require('gulp-sequence'),
+  scsslint = require('gulp-scss-lint'),
+  sass = require('gulp-sass'),
+  concat = require('gulp-concat'),
   files = {
-    js: 'server.js'
+    js: ['**/*.js','!node_modules/**', '!build/**']
   };
 
 gulp.task('eslint', function() {
-  return gulp.src(['**/*.js','!node_modules/**', '!build/**'])
+  return gulp.src(files.js)
     .pipe(eslint('.eslintrc'))
     .pipe(eslint.format(eslintFormatter));
+});
+
+gulp.task('scsslint', function() {
+  return gulp.src('./client/scss/*.scss')
+    .pipe(scsslint());
+});
+
+gulp.task('sass', function() {
+  return gulp.src('./client/scss/styles.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat('styles.css'))
+    .pipe(gulp.dest('./build/css'));
 });
 
 gulp.task('start', function() {
   nodemon({
     script: 'start.js',
-    ext: 'jsx js html', // look for changes in .jsx and .html files
-    tasks: ['eslint']
+    ext: 'jsx js html scss css', // look for changes in .jsx and .html files
+    ignore: ['build/**'],
+    tasks: ['build']
   }).on('restart', function() {
     console.log('Restarted app');
   });
@@ -31,6 +47,8 @@ gulp.task('webpack', function() {
     .pipe(gulp.dest('./build/js'));
 });
 
-gulp.task('lint', ['eslint']);
+gulp.task('lint', sequence('eslint', 'scsslint'));
 
-gulp.task('default', sequence('lint', 'webpack', 'start'));
+gulp.task('build', sequence('sass', 'webpack'));
+
+gulp.task('default', sequence('build', 'start'));
