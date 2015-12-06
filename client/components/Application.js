@@ -7,7 +7,7 @@ import {handleHistory} from 'fluxible-router';
 @provideContext
 @handleHistory({enableScroll: false})
 @connectToStores([ApplicationStore], (context) => ({
-    ApplicationStore: context.getStore(ApplicationStore).getState()
+  ApplicationStore: context.getStore(ApplicationStore).getState()
 }))
 class Application extends React.Component {
 

@@ -7,8 +7,8 @@ import serialize from 'serialize-javascript';
 import {navigateAction} from 'fluxible-router';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import app from './app';
-import HtmlComponent from './components/Html';
+import app from './client/app';
+import HtmlComponent from './client/components/Html';
 import {createElementWithContext} from 'fluxible-addons-react';
 
 const server = express();

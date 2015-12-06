@@ -3,15 +3,14 @@ var gulp = require('gulp'),
   eslint = require('gulp-eslint'),
   eslintFormatter = require('eslint-friendly-formatter'),
   nodemon = require('gulp-nodemon'),
-  webpack = require('webpack-stream');
-  sequence = require('gulp-sequence')
-
-var files = {
-  js: 'server.js'
-};
+  webpack = require('webpack-stream'),
+  sequence = require('gulp-sequence'),
+  files = {
+    js: 'server.js'
+  };
 
 gulp.task('eslint', function() {
-  return gulp.src(files.js)
+  return gulp.src(['**/*.js','!node_modules/**', '!build/**'])
     .pipe(eslint('.eslintrc'))
     .pipe(eslint.format(eslintFormatter));
 });
