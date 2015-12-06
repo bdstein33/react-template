@@ -1,5 +1,4 @@
 'use strict';
+require('babel/register');
 
-require('babel-register');
-require('./server');
-
+module.exports = require('./server');

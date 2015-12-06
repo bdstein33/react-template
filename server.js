@@ -1,41 +1,48 @@
 'use strict';
+require('babel/register');
 
-import 'localenv';
 import express from 'express';
-// import morgan from 'morgan';
-import bodyParser from 'body-parser';
-
+// import favicon from 'serve-favicon';
+import serialize from 'serialize-javascript';
 import {navigateAction} from 'fluxible-router';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import {createElementWithContext} from 'fluxible-addons-react';
 import app from './app';
-import HtmlComponent from '.components/Html';
-
-
+import HtmlComponent from './components/Html';
+import {createElementWithContext} from 'fluxible-addons-react';
 
 const server = express();
-const port = process.env.PORT || 3000;
 
-console.log(__dirname + '/client/dist');
-server.use('/public', express.static(__dirname + 'client'));
-// server.use(morgan('dev'));
-
-server.use(bodyParser.urlencoded({
-  extended: true
-}));
-
-server.use(bodyParser.json());
-
+//server.use(favicon(__dirname + '/../favicon.ico'));
+server.use('/public', express.static(__dirname + '/build'));
 server.use((req, res, next) => {
   const context = app.createContext();
 
-  console.log('Executing navigate action');
+  context.executeAction(navigateAction, { url: req.url }, (err) => {
+    if (err) {
+      if (err.statusCode && err.statusCode === 404) {
+        next();
+      } else {
+        next(err);
+      }
+      return;
+    }
 
-  context.executeAction()
+    console.log('Exposing context state');
+    const exposed = 'window.App=' + serialize(app.dehydrate(context)) + ';';
 
+    console.log('Rendering Application component into html');
+    const html = ReactDOM.renderToStaticMarkup(React.createElement(HtmlComponent, {
+      state: exposed,
+      markup: ReactDOM.renderToString(createElementWithContext(context)),
+      context: context.getComponentContext()
+    }));
+
+    console.log('Sending markup');
+    res.send(html);
+  });
 });
 
-server.listen(port, () => {
-  console.log('Listening on port ' + port);
-});
+const port = process.env.PORT || 3000;
+server.listen(port);
+console.log('Listening on port ' + port);
