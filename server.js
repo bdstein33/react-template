@@ -3,6 +3,7 @@ require('babel/register');
 
 import express from 'express';
 // import favicon from 'serve-favicon';
+import morgan from 'morgan';
 import serialize from 'serialize-javascript';
 import {navigateAction} from 'fluxible-router';
 import React from 'react';
@@ -15,6 +16,11 @@ const server = express();
 
 //server.use(favicon(__dirname + '/../favicon.ico'));
 server.use('/public', express.static(__dirname + '/build'));
+server.use(morgan('dev'));
+
+// import auth from './server/resources/auth';
+// server.use('api/auth', auth);
+
 server.use((req, res, next) => {
   const context = app.createContext();
 

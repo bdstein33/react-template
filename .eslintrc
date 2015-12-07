@@ -18,7 +18,8 @@
     'eol-last': 2,
     'no-multiple-empty-lines': [2, {"max": 1}],
     'no-console' : 0,
-    'no-unused-vars': 1
+    'no-unused-vars': 1,
+    'no-redeclare': 0
   },
   'plugins': [
     'react'
