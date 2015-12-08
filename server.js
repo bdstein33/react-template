@@ -18,8 +18,8 @@ const server = express();
 server.use('/public', express.static(__dirname + '/build'));
 server.use(morgan('dev'));
 
-// import auth from './server/resources/auth';
-// server.use('api/auth', auth);
+import auth from './server/resources/auth';
+server.use('/api/auth', auth);
 
 server.use((req, res, next) => {
   const context = app.createContext();
@@ -50,5 +50,7 @@ server.use((req, res, next) => {
 });
 
 const port = process.env.PORT || 3000;
-server.listen(port);
-console.log('Listening on port ' + port);
+server.listen(port, () => {
+  console.log('Listening on port ' + port);
+});
+
