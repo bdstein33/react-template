@@ -13,7 +13,7 @@ import serialize from 'serialize-javascript';
 import {navigateAction} from 'fluxible-router';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import app from './client/app';
+import app from './app';
 import HtmlComponent from './client/components/Html';
 import {createElementWithContext} from 'fluxible-addons-react';
 
@@ -33,6 +33,7 @@ db.sequelize.sync().then(() => {
   server.use((req, res, next) => {
     const context = app.createContext();
 
+    console.log('Executing navigate action');
     context.executeAction(navigateAction, { url: req.url }, (err) => {
       if (err) {
         if (err.statusCode && err.statusCode === 404) {
@@ -58,7 +59,7 @@ db.sequelize.sync().then(() => {
     });
   });
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 8000;
   server.listen(port, () => {
     console.log('Listening on port ' + port);
   });

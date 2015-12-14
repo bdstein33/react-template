@@ -1,17 +1,17 @@
+'use strict';
+
 import React from 'react';
 import serialize from 'form-serialize';
+import {login} from '../actions/auth';
 
-class LogIn extends React.Component {
+class Login extends React.Component {
   logIn(e) {
-    // console.log(e);
-    console.log(e.target);
-    console.log(serialize(e.target, {hash: true}));
     let formData = serialize(e.target, {hash: true});
     if (formData.password.length > 6 && formData.password === formData.confirm_password) {
-      // Create Account
-    } else {
-      // Throw Error
-    }
+      console.log(formData);
+      // AppActions.login(formData);
+      this.context.executeAction(login, formData);
+    } 
     e.preventDefault();
   }
 
@@ -19,12 +19,12 @@ class LogIn extends React.Component {
     return (
       <div>
         <p>Log In</p>
-        <form onSubmit={this.logIn}>
+        <form onSubmit={this.logIn.bind(this)}>
           <label>Email</label>
           <input type='text' name='email' />
           <label>Password</label>
           <input type='password' name='password' />
-          <label onClick={this.test}>Confirm Password</label>
+          <label >Confirm Password</label>
           <input type='password' name='confirm_password' />
           <input type='submit' />
         </form>
@@ -33,5 +33,5 @@ class LogIn extends React.Component {
   }
 }
 
-export default LogIn;
+export default Login;
 

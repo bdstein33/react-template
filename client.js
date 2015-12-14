@@ -1,6 +1,6 @@
-//import React from 'react';
+import React from 'react';
 import {render} from 'react-dom';
-import app from './client/app';
+import app from './app';
 import { createElementWithContext } from 'fluxible-addons-react';
 
 const dehydratedState = window.App; // Sent from the server

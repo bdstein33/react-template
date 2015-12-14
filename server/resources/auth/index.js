@@ -5,6 +5,7 @@ import endpointLoader from '../../utils/endpointLoader';
 
 let router = express.Router();
 
-router.post('/', endpointLoader('auth/get'));
+router.post('/signup', endpointLoader('auth/signup'));
+router.post('/login', endpointLoader('auth/login'));
 
 export default router;

@@ -1,3 +1,5 @@
+'use strict';
+
 export default {
   home: {
     path: '/',
@@ -15,7 +17,7 @@ export default {
     handler: require('../components/Login'),
     label: 'Home',
     action: (context, payload, done) => {
-      context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: 'Sign In' });
+      context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: 'Log In' });
       done();
     }
   }

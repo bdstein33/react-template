@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import TopNav from './TopNav';
 import ApplicationStore from '../stores/ApplicationStore';
@@ -19,13 +21,13 @@ class Application extends React.Component {
   // constructor(props, context) {
   //      super(props, context);
   // }
-  // componentDidUpdate(prevProps) {
-//     let newProps = this.props;
-//     if (newProps.ApplicationStore.pageTitle === prevProps.ApplicationStore.pageTitle) {
-//         return;
-//     }
-//     document.title = newProps.ApplicationStore.pageTitle;
-  // }
+  componentDidUpdate(prevProps) {
+    let newProps = this.props;
+    if (newProps.ApplicationStore.pageTitle === prevProps.ApplicationStore.pageTitle) {
+      return;
+    }
+    document.title = newProps.ApplicationStore.pageTitle;
+  }
   render() {
     let Handler = this.props.currentRoute.get('handler');
     //render content
