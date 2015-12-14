@@ -11,16 +11,17 @@ import {handleHistory} from 'fluxible-router';
 @connectToStores([ApplicationStore], (context) => ({
   ApplicationStore: context.getStore(ApplicationStore).getState()
 }))
+
 class Application extends React.Component {
+  static contextTypes = {
+    getStore: React.PropTypes.func,
+    executeAction: React.PropTypes.func
+  };
+  
+  constructor(props, context) {
+    super(props, context);
+  }
 
-  // static contextTypes = {
-//     getStore: React.PropTypes.func,
-//     executeAction: React.PropTypes.func
-  // };
-
-  // constructor(props, context) {
-  //      super(props, context);
-  // }
   componentDidUpdate(prevProps) {
     let newProps = this.props;
     if (newProps.ApplicationStore.pageTitle === prevProps.ApplicationStore.pageTitle) {
