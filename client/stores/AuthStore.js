@@ -2,34 +2,16 @@
 
 import {BaseStore} from 'fluxible/addons';
 
-class ApplicationStore extends BaseStore {
-  constructor(dispatcher) {
-    super(dispatcher);
-    this.pageTitle = '';
-  }
-  updatePageTitle(payload) {
+class AuthStore extends BaseStore {
+  login(payload) {
     this.pageTitle = payload.pageTitle;
     this.emitChange();
   }
-  getPageTitle() {
-    return this.pageTitle;
-  }
-  getState() {
-    return {
-      pageTitle: this.pageTitle
-    };
-  }
-  dehydrate() {
-    return this.getState();
-  }
-  rehydrate(state) {
-    this.pageTitle = state.pageTitle;
-  }
 }
 
-ApplicationStore.storeName = 'ApplicationStore';
-ApplicationStore.handlers = {
-  'UPDATE_PAGE_TITLE'    : 'updatePageTitle'
+AuthStore.storeName = 'AuthStore';
+AuthStore.handlers = {
+  'LOGIN'    : 'login'
 };
 
-export default ApplicationStore;
+export default AuthStore;

@@ -16,11 +16,8 @@ class Login extends React.Component {
 
   logIn(e) {
     e.preventDefault();
-    console.log('ATTEMPTING LOGIN');
     let formData = serialize(e.target, {hash: true});
     if (formData.password.length > 6 && formData.password === formData.confirm_password) {
-      console.log(formData);
-      // AppActions.login(formData);
       this.context.executeAction(login, formData);
     } 
     e.preventDefault();
