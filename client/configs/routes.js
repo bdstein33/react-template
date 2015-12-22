@@ -20,5 +20,15 @@ export default {
       context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: 'Log In' });
       done();
     }
+  },
+  todo: {
+    path: '/todo',
+    method: 'get',
+    handler: require('../components/ToDoList/Main'),
+    label: 'ToDo',
+    action: (context, payload, done) => {
+      context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: 'To Do List' });
+      done();
+    }
   }
 };

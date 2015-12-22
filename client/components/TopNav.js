@@ -18,6 +18,7 @@ class TopNav extends React.Component {
       <div className='topnav'>
         <div className='link'><NavLink routeName='home'>Home</NavLink></div>
         <div className='link'><NavLink routeName='login'>Login</NavLink></div>
+        <div className='link'><NavLink routeName='todo'>To Do List</NavLink></div>
       </div>
     );
   }

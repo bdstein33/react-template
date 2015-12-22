@@ -5,7 +5,7 @@ import Sequelize from 'sequelize';
 import Q from 'q';
 import _ from 'lodash';
 
-let sequelize = new Sequelize('test', 'root', '', {
+let sequelize = new Sequelize('test', 'root', 'root', {
   host: '127.0.0.1',
   dialect: 'mysql'
 });
